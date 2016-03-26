@@ -13,27 +13,48 @@ r(); // and again
 ```
 
 API
-===
+---
 
 The following distribution are available:
 
-* `uniform(min, max)` Uniform distribution in range [min, max).
-* `normal(μ, σ)` Normal distribution with mean and standard deviation.
-* `exponential(λ)` Exponential distribution with lambda.
-* `lognormal(μ, σ)` Log-normal distribution defined as ln(normal(μ, σ)).
-* `zipf(s, N)` Zipf's distribution returning integers in range [1, N]
+```js
+Prob.uniform(min, max) // Uniform distribution in range [min, max).
+Prob.normal(μ, σ)      // Normal distribution with mean and standard deviation.
+Prob.exponential(λ)    // Exponential distribution with lambda.
+Prob.lognormal(μ, σ)   // Log-normal distribution defined as ln(normal(μ, σ)).
+Prob.zipf(s, N)        // Zipf's distribution returning integers in range [1, N]
+```
 
 After generating a distribution, the following methods are available:
-* `var r = exponential(1.0);`
-* `r()` Generates a number within the distribution
-* `r(src)` Generates a number using a `src` of random numbers. (See note later)
-* `r.Min` The min value which could be returned (inclusive)
-* `r.Max` The max value which could be returned (exclusive)
-* `r.Mean` The expected mean for this distribution.
-* `r.Variance` The expected variance for this distribution.
+```js
+var r = Prob.exponential(1.0); // Create a distribution.
+r()        // Generates a number within the distribution.
+r(src)     // Generates a number using a `src` of random numbers. (See note below.)
+r.Min      // The min random number which could be returned by `r()` (inclusive).
+r.Max      // The max random number which could be returned by `r()` (exclusive).
+r.Mean     // The expected mean for this distribution.
+r.Variance // The expected variance for this distribution.
+```
 
 Random source
-=============
+-------------
 
 Internally Prob.js uses Mersenne Twister provided by [random-js](https://github.com/ckknight/random-js). This can be overriden by providing the `src` argument when generating a number. Src is expected to be a function that when called returns a number uniformally in the range [0,1).
 
+License
+-------
+```
+Copyright 2016 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
