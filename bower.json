@@ -1,7 +1,7 @@
 {
   "name": "prob.js",
   "version": "1.0.0",
-  "license": "BSD-2-Clause",
+  "license": "Apache-2.0",
   "dependencies": {
     "random": "1.0.x"
   },

@@ -1,6 +1,6 @@
 {
   "name": "prob.js",
-  "license": "BSD-2-Clause",
+  "license": "Apache-2.0",
   "devDependencies": {
     "jshint": "2.7.x",
     "jsonlint": "1.6.x",
