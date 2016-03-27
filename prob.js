@@ -16,7 +16,7 @@
 	           typeof global == 'object' && global.global === global && global ||
 	           this;
 
-	var Prob = function() {};
+	var Prob = {};
 
 	// Export the Prob object for **Node.js**, with backwards-compatibility for
 	// their old module API. If we're in the browser, add `Prob` as a global object.
@@ -42,8 +42,11 @@
 	}
 
 	if (typeof Random === 'undefined') {
-		// TODO Require(...) this if needed
-		throw "random-js is required https://github.com/ckknight/random-js";
+		if (typeof require === 'function') {
+			var Random = require('random-js');
+		} else {
+			throw "random-js is required https://github.com/ckknight/random-js";
+		}
 	}
 
 	var mt = Random.engines.mt19937().autoSeed(); // Fallback generator when one isn't specified
