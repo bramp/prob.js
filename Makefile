@@ -1,23 +1,29 @@
-.PHONY : all test clean veryclean lint
+.PHONY : all test clean veryclean lint node_check
 
 NODE_MODULES := $(PWD)/node_modules/.bin
 BOWER_COMPONENTS := $(PWD)/bower_components
 
 all: lint dist/prob-min.js test
 
-node_modules: package.json
+node_check:
+	@which node > /dev/null || (echo "node is not installed" && exit 1)
+	@which npm > /dev/null || (echo "npm is not installed" && exit 1)
+
+
+node_modules: node_check package.json
 	#
 	# NPM update needed.
 	#
+	npm install
 	npm update
-	touch $@
+	touch -c $@
 
 bower_components: node_modules bower.json
 	#
 	# Bower update needed.
 	#
 	$(NODE_MODULES)/bower update
-	touch $@
+	touch -c $@
 
 clean:
 	-rm dist/*
