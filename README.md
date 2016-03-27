@@ -41,7 +41,8 @@ Random source
 
 Internally Prob.js uses Mersenne Twister provided by [random-js](https://github.com/ckknight/random-js). This can be overriden by providing the `src` argument when generating a number. Src is expected to be a function that when called returns a signed integer uniformally in the range [-2^31,2^31).
 
-For example
+For example:
+
 ```js
 // https://xkcd.com/221/
 function xkcd_source() {
