@@ -14,7 +14,7 @@
 #
 ################################################################################
 
-.PHONY : all test clean veryclean lint node_check
+.PHONY: all test clean veryclean lint
 
 # Disable implicit rules
 .SUFFIXES:
@@ -25,12 +25,10 @@ BOWER_COMPONENTS := $(PWD)/bower_components
 
 all: lint dist/prob-min.js test
 
-node_check:
-	@which node > /dev/null || (echo "node is not installed" && exit 1)
+node_modules: package.json
+	@which nodde > /dev/null || (echo "node is not installed" && exit 1)
 	@which npm > /dev/null || (echo "npm is not installed" && exit 1)
 
-
-node_modules: node_check package.json
 	#
 	# NPM update needed.
 	#
