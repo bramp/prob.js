@@ -16,6 +16,10 @@
 
 .PHONY : all test clean veryclean lint node_check
 
+# Disable implicit rules
+.SUFFIXES:
+MAKEFLAGS += --no-builtin-rules
+
 NODE_MODULES := $(PWD)/node_modules/.bin
 BOWER_COMPONENTS := $(PWD)/bower_components
 
