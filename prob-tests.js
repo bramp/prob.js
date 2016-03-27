@@ -98,7 +98,7 @@ function checkFunction(name, func) {
 	assert.ok(f(), name + " generated a random number");
 }
 
-QUnit.test( "test defaults", function(assert) {
+QUnit.test( "defaults", function(assert) {
 	// Tests we can create each distribution with default args, and generate one number.
 	checkFunction('uniform', Prob.uniform);
 	checkFunction('normal', Prob.normal);
@@ -109,7 +109,6 @@ QUnit.test( "test defaults", function(assert) {
 
 
 QUnit.test( "zipf args", function(assert) {
-	
 	assert.throws(function() {
 		Prob.zipf(1, 0);
 	}, "throws with illegal 'N' argument");
@@ -118,3 +117,22 @@ QUnit.test( "zipf args", function(assert) {
 		Prob.zipf(1, -1);
 	}, "throws with illegal 'N' argument");
 });
+
+QUnit.test( "source", function(assert) {
+	var xkcd_source = function() {
+		return 4; // chosen by fair dice roll.
+		          // guranteed to be random.
+	};
+
+	var r = Prob.uniform();
+	var x = r(xkcd_source);
+	var y = r(xkcd_source);
+	var z = r(xkcd_source);
+
+	assert.ok(typeof x === "number", "XKCD random source supplys a number");
+	assert.ok(x === y && y == z, "XKCD random source works");
+
+	x = r(Random.engines.nativeMath);
+	assert.ok(typeof x === "number", "Other random js source supplys a number");
+});
+
