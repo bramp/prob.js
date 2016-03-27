@@ -2,11 +2,11 @@
   "name": "prob.js",
   "license": "Apache-2.0",
   "devDependencies": {
-    "jshint": "2.7.x",
+    "jshint": "2.9.x",
     "jsonlint": "1.6.x",
     "qunit": "git://github.com/bramp/node-qunit.git",
-    "uglify-js": "2.4.x",
-    "bower": "1.5.x",
+    "uglify-js": "2.6.x",
+    "bower": "1.7.x",
     "random-js": "1.0.x"
   },
   "scripts": {

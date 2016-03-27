@@ -6,6 +6,6 @@
     "random": "1.0.x"
   },
   "devDependencies": {
-    "qunit": "^1.23.0"
+    "qunit": "1.23.x"
   }
 }
