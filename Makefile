@@ -26,7 +26,7 @@ BOWER_COMPONENTS := $(PWD)/bower_components
 all: lint dist/prob-min.js test
 
 node_modules: package.json
-	@which nodde > /dev/null || (echo "node is not installed" && exit 1)
+	@which node > /dev/null || (echo "node is not installed" && exit 1)
 	@which npm > /dev/null || (echo "npm is not installed" && exit 1)
 
 	#
