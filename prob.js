@@ -54,12 +54,10 @@
 	    }
 	}
 
+	var Random = Random || (typeof require === 'function' ? require('random-js') : null);
+
 	if (typeof Random === 'undefined') {
-		if (typeof require === 'function') {
-			var Random = require('random-js');
-		} else {
-			throw "random-js is required https://github.com/ckknight/random-js";
-		}
+		throw "random-js is required https://github.com/ckknight/random-js";
 	}
 
 	var mt = Random.engines.mt19937().autoSeed(); // Fallback generator when one isn't specified
