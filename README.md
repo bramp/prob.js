@@ -1,5 +1,5 @@
 Prob.js
-=============================================
+=======
 Generate random numbers from different probability distributions.
 
 by [Andrew Brampton](https://bramp.net) 2016
@@ -9,7 +9,6 @@ var r = Prob.normal(0, 1.0); // μ = 0, σ = 1.0
 r(); // Returns a random number from this distribution
 r(); // Returns another random number
 r(); // and again
-
 ```
 
 API
@@ -26,6 +25,7 @@ Prob.zipf(s, N)        // Zipf's distribution returning integers in range [1, N]
 ```
 
 After generating a distribution, the following methods are available:
+
 ```js
 var r = Prob.exponential(1.0); // Create a distribution.
 r()        // Generates a number within the distribution.
@@ -39,7 +39,7 @@ r.Variance // The expected variance for this distribution.
 Random source
 -------------
 
-Internally Prob.js uses Mersenne Twister provided by [random-js](https://github.com/ckknight/random-js). This can be overriden by providing the `src` argument when generating a number. Src is expected to be a function that when called returns a signed integer uniformally in the range [-2^31,2^31).
+Internally Prob.js uses Mersenne Twister provided by [random-js](https://github.com/ckknight/random-js). This can be overridden by providing the `src` argument when generating a number. `src` is expected to be a function that when called returns a signed integer uniformly in the range [-2^31,2^31).
 
 For example:
 
@@ -47,7 +47,7 @@ For example:
 // https://xkcd.com/221/
 function xkcd_source() {
 	return 4; // chosen by fair dice roll.
-	          // guranteed to be random.
+	          // guaranteed to be random.
 };
 
 var r = Prob.exponential(1.0); // Create a distribution.
@@ -60,7 +60,6 @@ console.log( r(Random.engines.browserCrypto) );
 
 // Or just use the default which happens to be Random.engines.mt19937().autoSeed()
 console.log( r() );
-
 ```
 
 Licence (Apache 2)
