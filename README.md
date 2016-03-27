@@ -39,10 +39,31 @@ r.Variance // The expected variance for this distribution.
 Random source
 -------------
 
-Internally Prob.js uses Mersenne Twister provided by [random-js](https://github.com/ckknight/random-js). This can be overriden by providing the `src` argument when generating a number. Src is expected to be a function that when called returns a number uniformally in the range [0,1).
+Internally Prob.js uses Mersenne Twister provided by [random-js](https://github.com/ckknight/random-js). This can be overriden by providing the `src` argument when generating a number. Src is expected to be a function that when called returns a signed integer uniformally in the range [-2^31,2^31).
 
-License
--------
+For example
+```js
+// https://xkcd.com/221/
+function xkcd_source() {
+	return 4; // chosen by fair dice roll.
+	          // guranteed to be random.
+};
+
+var r = Prob.exponential(1.0); // Create a distribution.
+
+// Use the XKCD source
+console.log( r(xkcd_source) );
+
+// Or use a better source (supplied by random-js)
+console.log( r(Random.engines.browserCrypto) );
+
+// Or just use the default which happens to be Random.engines.mt19937().autoSeed()
+console.log( r() );
+
+```
+
+Licence (Apache 2)
+------------------
 ```
 Copyright 2016 Google Inc. All Rights Reserved.
 
