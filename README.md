@@ -64,6 +64,9 @@ console.log( r() );
 
 Licence (Apache 2)
 ------------------
+*This is not an official Google product (experimental or otherwise), it is
+just code that happens to be owned by Google.*
+
 ```
 Copyright 2016 Google Inc. All Rights Reserved.
 
