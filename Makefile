@@ -53,13 +53,13 @@ lint: node_modules
 	$(NODE_MODULES)/jsonlint package.json -q
 	$(NODE_MODULES)/jsonlint bower.json -q
 
-test: node_modules dist/prob-min.js
+test: node_modules dist/prob.js dist/prob-min.js
 
 	$(NODE_MODULES)/qunit \
 		--cov \
 		--timeout 60000 \
 		-d Random:$(BOWER_COMPONENTS)/random/lib/random.min.js \
-		-c Prob:prob.js \
+		-c Prob:dist/prob.js \
 		-t *-tests.js
 
 	@echo Coverage report at file:///`pwd`/coverage/lcov-report/sim/prob.js.html
@@ -72,7 +72,7 @@ test: node_modules dist/prob-min.js
 #		-t *-tests.js
 
 dist/prob.js: prob.js
-	cp prob.js dist/prob.js
+	cp $< $@
 
 dist/prob-min.js dist/prob-min.js.map: bower_components dist/prob.js
 	cd dist && \
