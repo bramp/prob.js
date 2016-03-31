@@ -7,3 +7,4 @@ TODOs
   * Pareto
   * Weibull
   * Poisson
+* Make the release process a one-liner.

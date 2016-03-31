@@ -62,6 +62,17 @@ console.log( r(Random.engines.browserCrypto) );
 console.log( r() );
 ```
 
+How to release
+--------------
+
+```shell
+make clean && make
+git add dist/prob-min.js dist/prob-min.js.map
+mversion minor -m "Releasing v%s"
+git push --tags
+npm publish
+```
+
 Licence (Apache 2)
 ------------------
 *This is not an official Google product (experimental or otherwise), it is
