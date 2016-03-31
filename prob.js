@@ -55,8 +55,7 @@
 	}
 
 	var Random = Random || (typeof require === 'function' ? require('random-js') : null);
-
-	if (typeof Random === 'undefined') {
+	if (Random === null) {
 		throw "random-js is required https://github.com/ckknight/random-js";
 	}
 
@@ -191,5 +190,11 @@
 		f.Variance = null; // TODO
 		return f;
 	};
+
+	if (typeof define === 'function' && define.amd) {
+		define('prob', [], function() {
+			return Prob;
+		});
+	}
 
 }());
