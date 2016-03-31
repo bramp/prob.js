@@ -55,14 +55,14 @@ lint: node_modules
 	$(NODE_MODULES)/jsonlint package.json -q
 	$(NODE_MODULES)/jsonlint bower.json -q
 
-test: node_modules dist/prob.js dist/prob-min.js
+test: node_modules dist/prob-min.js
 
 	$(NODE_MODULES)/qunit \
 		--cov \
 		--timeout 60000 \
 		-d Random:$(BOWER_COMPONENTS)/random/lib/random.min.js \
-		-c Prob:dist/prob.js \
-		-t *-tests.js
+		-c Prob:dist/prob-min.js \
+		-t tests/*-tests.js
 
 	@echo Coverage report at file:///`pwd`/coverage/lcov-report/sim/prob.js.html
 

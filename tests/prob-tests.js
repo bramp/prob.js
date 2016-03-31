@@ -60,7 +60,7 @@ function checkResults(assert, f, trials) {
 	}
 }
 
-QUnit.module("distributions");
+QUnit.module("Distributions");
 
 QUnit.test( "uniform", function(assert) {
 	var f = Prob.uniform(1, 3);
