@@ -28,7 +28,7 @@
     ],
     "license": "Apache-2.0",
     "main": "dist/prob-min.js",
-    "name": "Prob.js",
+    "name": "prob.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/bramp/prob.js.git"
