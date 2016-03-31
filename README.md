@@ -67,7 +67,7 @@ How to release
 
 ```shell
 make clean && make
-git add dist/prob-min.js dist/prob-min.js.map
+git add dist/prob.js dist/prob-min.js dist/prob-min.js.map
 mversion minor -m "Releasing v%s"
 git push --tags
 npm publish
