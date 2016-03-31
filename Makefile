@@ -65,6 +65,7 @@ test: node_modules dist/prob-min.js
 		-t tests/*-tests.js
 
 	@echo Coverage report at file:///`pwd`/coverage/lcov-report/sim/prob.js.html
+	@echo [test] OK
 
 #	$(NODE_MODULES)/qunit \
 #		--cov \
