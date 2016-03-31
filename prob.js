@@ -13,12 +13,6 @@
 // limitations under the License.
 //
 ////////////////////////////////////////////////////////////////////////////////
-//
-// TODO: Add the following dist:
-//  * Pareto
-//  * Weibull
-//  * Poisson
-//
 (function() {
 	'use strict';
 
