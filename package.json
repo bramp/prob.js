@@ -1,15 +1,40 @@
 {
-  "name": "prob.js",
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "jshint": "2.9.x",
-    "jsonlint": "1.6.x",
-    "qunit": "git://github.com/bramp/node-qunit.git",
-    "uglify-js": "2.6.x",
-    "bower": "1.7.x",
-    "random-js": "1.0.x"
-  },
-  "scripts": {
-    "test": "make test"
-  }
+    "author": "Andrew Brampton <github@bramp.net>",
+    "bugs": {
+        "url": "https://github.com/bramp/prob.js/issues"
+    },
+    "dependencies": {
+        "random-js": "1.0.x"
+    },
+    "description": "Generate random numbers from different probability distributions.",
+    "devDependencies": {
+        "bower": "1.7.x",
+        "jshint": "2.9.x",
+        "jsonlint": "1.6.x",
+        "qunit": "0.9.x",
+        "random-js": "1.0.x",
+        "uglify-js": "2.6.x",
+        "requirejs": "2.2.x"
+    },
+    "homepage": "https://github.com/bramp/prob.js#readme",
+    "keywords": [
+        "random",
+        "probability",
+        "distributions",
+        "normal",
+        "lognormal",
+        "exponential",
+        "zipf"
+    ],
+    "license": "Apache-2.0",
+    "main": "dist/prob-min.js",
+    "name": "Prob.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bramp/prob.js.git"
+    },
+    "scripts": {
+        "test": "make test"
+    },
+    "version": "1.0.0"
 }
