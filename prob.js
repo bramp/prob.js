@@ -34,8 +34,8 @@
 	// Export the Prob object for **Node.js**, with backwards-compatibility for
 	// their old module API. If we're in the browser, add `Prob` as a global object.
 	// (`nodeType` is checked to ensure that `module` and `exports` are not HTML elements.)
-	if (typeof exports != 'undefined' && !exports.nodeType) {
-		if (typeof module != 'undefined' && !module.nodeType && module.exports) {
+	if (typeof exports !== 'undefined' && !exports.nodeType) {
+		if (typeof module !== 'undefined' && !module.nodeType && module.exports) {
 			exports = module.exports = Prob;
 		}
 		exports.Prob = Prob;
@@ -45,13 +45,13 @@
 
 	// Taken from http://stackoverflow.com/a/15313435/88646
 	function assert(condition, message) {
-	    if (!condition) {
-	        message = message || "Assertion failed";
-	        if (typeof Error !== "undefined") {
-	            throw new Error(message);
-	        }
-	        throw message; // Fallback
-	    }
+		if (!condition) {
+			message = message || "Assertion failed";
+			if (typeof Error !== "undefined") {
+				throw new Error(message);
+			}
+			throw message; // Fallback
+		}
 	}
 
 	var Random = Random || (typeof require === 'function' ? require('random-js') : null);
@@ -144,18 +144,18 @@
 	};
 
 	function binary_search(arr, needle) {
-	    var high = arr.length;
-	    var low = -1;
+		var high = arr.length;
+		var low = -1;
 
-	    while (high - low > 1) {
-	        var mid = Math.floor(low + (high - low) / 2);
-	        if (arr[mid] < needle)
-	            low = mid;
-	        else
-	            high = mid;
-	    }
+		while (high - low > 1) {
+			var mid = Math.floor(low + (high - low) / 2);
+			if (arr[mid] < needle)
+				low = mid;
+			else
+				high = mid;
+		}
 
-        return high;
+		return high;
 	}
 
 	// Returns integers random chosen from a zipf disribution.
