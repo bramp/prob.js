@@ -1,7 +1,8 @@
 {
   "name": "prob.js-demo",
   "version": "1.0.0",
-  "license": "BSD-2-Clause",
+  "author": "Andrew Brampton <github@bramp.net>",
+  "license": "Apache-2.0",
   "dependencies": {
     "prob.js": "1.0.x",
     "plotly.js": "1.7.x",
