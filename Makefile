@@ -87,11 +87,14 @@ dist/prob.js: prob.js
 	cp $< $@
 
 dist/prob-min.js dist/prob-min.js.map: bower_components dist/prob.js
+	$(eval VERSION := $(shell $(NODE_MODULES)/mversion | tail -n 1 | cut -d ' ' -f 2))
+	$(eval YEAR := $(shell date +%Y))
+
 	cd dist && \
 	$(NODE_MODULES)/uglifyjs \
 		prob.js \
 		-o prob-min.js \
 		--compress --comments --lint \
-		--preamble "/* Prob.js v1.0.0 (c) 2016 Google, Inc. License: Apache 2.0 */" \
+		--preamble "/* Prob.js $(VERSION) (c) $(YEAR) Google, Inc. License: Apache 2.0 */" \
 		--source-map prob-min.js.map \
 		--source-map-url prob-min.js.map
