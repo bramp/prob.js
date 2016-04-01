@@ -1,0 +1,4 @@
+[submodule "_site"]
+	path = _site
+	url = https://github.com/bramp/prob.js.git
+	branch = gh-pages
