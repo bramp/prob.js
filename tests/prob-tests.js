@@ -108,7 +108,7 @@ QUnit.test( "zipf", function(assert) {
 
 QUnit.module("API");
 
-function checkFunction(name, func) {
+function checkFunction(assert, name, func) {
 	var f = func();
 	assert.ok(typeof f === 'function', name + " returns a default generator function");
 	assert.ok(f(), name + " generated a random number");
@@ -116,11 +116,11 @@ function checkFunction(name, func) {
 
 QUnit.test( "defaults", function(assert) {
 	// Tests we can create each distribution with default args, and generate one number.
-	checkFunction('uniform', Prob.uniform);
-	checkFunction('normal', Prob.normal);
-	checkFunction('exponential', Prob.exponential);
-	checkFunction('lognormal', Prob.lognormal);
-	checkFunction('zipf', Prob.zipf);
+	checkFunction(assert, 'uniform', Prob.uniform);
+	checkFunction(assert, 'normal', Prob.normal);
+	checkFunction(assert, 'exponential', Prob.exponential);
+	checkFunction(assert, 'lognormal', Prob.lognormal);
+	checkFunction(assert, 'zipf', Prob.zipf);
 });
 
 

@@ -14,7 +14,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Test various imports we support
+// Test various imports we support.
+// Can only be run from within qunit command line.
 // 
 
 var FILE = '../dist/prob-min';

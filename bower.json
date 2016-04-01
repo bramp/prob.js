@@ -7,7 +7,7 @@
     },
     "description": "Generate random numbers from different probability distributions.",
     "devDependencies": {
-        "qunit": "1.23.x"
+        "qunit": "1.10.0"
     },
     "homepage": "https://github.com/bramp/prob.js#readme",
     "ignore": [
