@@ -48,7 +48,7 @@
 		}
 	}
 
-	var Random = Random || (typeof require === 'function' ? require('random-js') : null);
+	var Random = root.Random || (typeof require === 'function' ? require('random-js') : null);
 	if (Random === null) {
 		throw "random-js is required https://github.com/ckknight/random-js";
 	}
