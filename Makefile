@@ -14,7 +14,7 @@
 #
 ################################################################################
 
-.PHONY: all veryclean
+.PHONY: all lint veryclean
 
 # Disable implicit rules
 .SUFFIXES:
@@ -42,6 +42,11 @@ bower_components: node_modules bower.json
 	$(NODE_MODULES)/bower update --force
 	touch -c $@
 
-veryclean: clean
+lint: node_modules
+	$(NODE_MODULES)/jshint --verbose *.js
+	$(NODE_MODULES)/jsonlint package.json -q
+	$(NODE_MODULES)/jsonlint bower.json -q
+
+veryclean:
 	-rm -rf node_modules
 	-rm -rf bower_components
