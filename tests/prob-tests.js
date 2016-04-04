@@ -123,6 +123,7 @@ QUnit.test( "defaults", function(assert) {
 	checkFunction(assert, 'zipf', Prob.zipf);
 });
 
+// TODO Check zipf binary search works as expected, search for 0, 1.0, etc
 
 QUnit.test( "zipf args", function(assert) {
 	assert.throws(function() {
