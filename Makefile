@@ -55,6 +55,10 @@ lint: node_modules
 	$(NODE_MODULES)/jsonlint package.json -q
 	$(NODE_MODULES)/jsonlint bower.json -q
 
+	$(NODE_MODULES)/jshint --verbose cli/*.js
+	$(NODE_MODULES)/jsonlint cli/package.json -q
+
+
 test: node_modules dist/prob-min.js
 
 	# Unminified (with coverage)
