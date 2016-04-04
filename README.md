@@ -4,12 +4,36 @@ Generate random numbers from different probability distributions.
 
 by [Andrew Brampton](https://bramp.net) 2016
 
+Use
+---
+
+*Bower*:
+```shell
+bower install prob.js
+```
+
+```html
+<script src="bower_components/random/lib/random.min.js" type="text/javascript" ></script>
+<script src="bower_components/prob.js/dist/prob-min.js" type="text/javascript" ></script>
+```
+
+*Node.js*:
+```shell
+npm install prob.js
+```
+
+```js
+var Prob = require('prob.js');
+```
+
+*Example*:
 ```js
 var r = Prob.normal(0, 1.0); // μ = 0, σ = 1.0 
 r(); // Returns a random number from this distribution
 r(); // Returns another random number
 r(); // and again
 ```
+
 
 API
 ---
