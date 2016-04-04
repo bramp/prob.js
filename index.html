@@ -22,9 +22,27 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1>Prob.js Examples</h1>
 
         <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Prob.js Examples</h1>
+                    <p>Generate random numbers from different probability distributions.</p>
+                    <p>by <a href="https://bramp.net">Andrew Brampton</a> 2016</p>
+                    <p><a href="https://github.com/bramp/prob.js#readme">README</a> | <a href="https://github.com/bramp/prob.js">GitHub</a></p>
+                    <h2>Install</h2>
+                    <pre><code class="language-shell">bower install prob.js</code></pre>
+<pre><code class="language-html">&lt;script src=&quot;bower_components/random/lib/random.min.js&quot; type=&quot;text/javascript&quot; &gt;&lt;/script&gt;
+&lt;script src=&quot;bower_components/prob.js/dist/prob-min.js&quot; type=&quot;text/javascript&quot; &gt;&lt;/script&gt;
+</code></pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Demos</h2>
+                    <p>We create a random distribution, then generate 1 million numbers, drawing histograms as we go.</p>
+                </div>
+            </div>
             <div class="row">
               <div class="col-md-6">
                   
@@ -75,60 +93,7 @@ var f = Prob.zipf(1, 10);</code></pre>
 
         <script type="text/javascript" src="bower_components/prism/prism.js"></script>
 
-        <script>
-        'use strict';
-        var mt = Random.engines.mt19937().autoSeed();
-
-        function drawHistogram(div, r) {
-
-            // Generate random numbers
-            var x = [];
-            var data = [{
-                x: x,
-                type: 'histogram',
-            }];
-            var layout = {
-                showlegend: false,
-                margin: {
-                    t: 20,
-                    b: 40
-                }
-            };
-            var config = {
-                displayModeBar: false
-            }
-
-            if (div == "lognormal") {
-                layout['xaxis'] = {
-                    range: [0, 5]
-                };
-            }
-
-            var drawMore = function() {
-                // TODO We could make this way faster if we calculate the bins ourselves
-                //      and not store a full array of random numbers.
-                for (var i = 0; i < 10000; i++) {
-                    x.push( r(mt) );
-                }
-
-                Plotly.newPlot(div, data, layout, config);
-
-                if (x.length < 100000) {
-                    setTimeout(drawMore, 1);
-                }
-            }
-
-            // Use setTimeout so we can not block the UI thread, and redraw the graphs as we go.
-            setTimeout(drawMore, 0);
-        }
-
-        drawHistogram('normal',      Prob.normal());      // μ = 0, σ = 1.0 
-        drawHistogram('uniform',     Prob.uniform());     // min = 0, max = 1.0
-        drawHistogram('exponential', Prob.exponential()); // λ = 1.0
-        drawHistogram('lognormal',   Prob.lognormal());   // μ = 0, σ = 1.0
-        drawHistogram('zipf',        Prob.zipf());        // s = 1, N = 10 
-
-        </script>
+        <script type="text/javascript" src="demo.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
