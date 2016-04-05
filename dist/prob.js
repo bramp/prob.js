@@ -159,7 +159,7 @@
 		// A binary search of the CDF used to find the value which maps to that random number.
 		// 
 		s = typeof s !== 'undefined' ? s : 1;
-		N = typeof N !== 'undefined' ? N : 10;
+		N = typeof N !== 'undefined' ? N : 100;
 
 		assert(N >= 1, "N must be >= 1");
 
