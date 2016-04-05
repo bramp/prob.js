@@ -102,9 +102,9 @@
         xrange: [0, 5],
         yrange: [0, 0.7],
     });   
-    drawHistogram('zipf', Prob.zipf(), { // s = 1, N = 10 
-        nbinsx: 11,
-        xrange: [0, 11],
+    drawHistogram('zipf', Prob.zipf(), { // s = 1, N = 100
+        nbinsx: 101,
+        xrange: [0, 101],
         yrange: [0, 0.4],
     });
 }());
