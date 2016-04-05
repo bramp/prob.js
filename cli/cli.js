@@ -24,7 +24,7 @@ var distributions = {
 	'normal':      {desc: 'Normal distribution',      args: [['mean', 0], ['stddev', 1]]},
 	'exponential': {desc: 'Exponential distribution', args: [['lambda', 1]]},
 	'lognormal':   {desc: 'Lognormal distribution',   args: [['mean', 0], ['stddev', 1]]},
-	'zipf':        {desc: 'Zipf\'s distribution',     args: [['s', 1], ['n', 10]]},
+	'zipf':        {desc: 'Zipf\'s distribution',     args: [['s', 1], ['n', 100]]},
 };
 
 var argv = require('yargs')
