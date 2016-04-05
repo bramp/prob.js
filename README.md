@@ -7,7 +7,7 @@ by [Andrew Brampton](https://bramp.net) 2016
 Use
 ---
 
-*Bower*:
+**Bower**:
 ```shell
 bower install prob.js
 ```
@@ -17,7 +17,7 @@ bower install prob.js
 <script src="bower_components/prob.js/dist/prob-min.js" type="text/javascript" ></script>
 ```
 
-*Node.js*:
+**Node.js**:
 ```shell
 npm install prob.js
 ```
@@ -26,14 +26,13 @@ npm install prob.js
 var Prob = require('prob.js');
 ```
 
-*Example*:
+**Example**:
 ```js
 var r = Prob.normal(0, 1.0); // μ = 0, σ = 1.0 
 r(); // Returns a random number from this distribution
 r(); // Returns another random number
 r(); // and again
 ```
-
 
 API
 ---
