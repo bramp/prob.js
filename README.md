@@ -93,7 +93,7 @@ make clean && make test   # Build and test once
 mversion patch            # Bump version number (v1.2.3 | major | minor | patch)
 make clean && make        # Be extra sure after the version bump it continues to work
 
-git add bower.json package.json dist/{prob-min.js,prob-min.js.map,prob.js}
+git add -f bower.json package.json dist/{prob-min.js,prob-min.js.map,prob.js}
 VERSION=v`mversion | tail -n 1 | cut -d ' ' -f 2`
 git commit -m "Releasing version $VERSION"
 git tag $VERSION
