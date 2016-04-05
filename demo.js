@@ -60,7 +60,7 @@
             for (i = 0; i < iterations; i++) {
                 var j = r(mt);
                 if (j >= xmin && j <= xmax) {
-                    bins[ Math.floor((j - xmin) / xrange * nbinsx) ]++;
+                    bins[ Math.floor((j - xmin) * nbinsx / xrange) ]++;
                 }
                 count++;
             }
@@ -91,7 +91,7 @@
         nbinsx: 100,
         xrange: [0, 1],
         yrange: [0, 1.2],
-    });    
+    });
     drawHistogram('exponential', Prob.exponential(), {  // λ = 1.0
         nbinsx: 120,
         xrange: [0, 5],
@@ -101,7 +101,7 @@
         nbinsx: 120,
         xrange: [0, 5],
         yrange: [0, 0.7],
-    });   
+    });
     drawHistogram('zipf', Prob.zipf(), { // s = 1, N = 100
         nbinsx: 101,
         xrange: [0, 101],
