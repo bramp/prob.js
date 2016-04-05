@@ -48,6 +48,7 @@
 		}
 	}
 
+	// TODO Remove the dependency on Random JS
 	var Random = root.Random || (typeof require === 'function' ? require('random-js') : null);
 	if (Random === null) {
 		throw "random-js is required https://github.com/ckknight/random-js";
@@ -158,7 +159,7 @@
 		// A binary search of the CDF used to find the value which maps to that random number.
 		// 
 		s = typeof s !== 'undefined' ? s : 1;
-		N = typeof N !== 'undefined' ? N : 10;
+		N = typeof N !== 'undefined' ? N : 100;
 
 		assert(N >= 1, "N must be >= 1");
 
