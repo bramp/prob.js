@@ -88,17 +88,19 @@ test: node_modules dist/prob-min.js
 #		-t *-tests.js
 
 dist/prob.js: prob.js
-	cp $< $@
-
-dist/prob-min.js dist/prob-min.js.map: bower_components dist/prob.js
 	$(eval VERSION := $(shell $(NODE_MODULES)/mversion | tail -n 1 | cut -d ' ' -f 2))
 	$(eval YEAR := $(shell date +%Y))
+
+	echo "/* Prob.js $(VERSION) (c) $(YEAR) Google, Inc. License: Apache 2.0 */" > $@
+	cat $< >> $@
+
+dist/prob-min.js dist/prob-min.js.map: bower_components dist/prob.js
 
 	cd dist && \
 	$(NODE_MODULES)/uglifyjs \
 		prob.js \
 		-o prob-min.js \
-		--compress --comments --lint \
-		--preamble "/* Prob.js $(VERSION) (c) $(YEAR) Google, Inc. License: Apache 2.0 */" \
+		--compress --lint \
+		--comments '/Prob.js/' \
 		--source-map prob-min.js.map \
 		--source-map-url prob-min.js.map

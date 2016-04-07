@@ -26,7 +26,7 @@
         "zipf"
     ],
     "license": "Apache-2.0",
-    "main": "dist/prob-min.js",
+    "main": "dist/prob.js",
     "moduleType": [
         "amd",
         "globals",
