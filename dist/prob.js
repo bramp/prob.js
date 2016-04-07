@@ -1,4 +1,4 @@
-/* Prob.js 1.0.4 (c) 2016 Google, Inc. License: Apache 2.0 */
+/* Prob.js 1.0.5 (c) 2016 Google, Inc. License: Apache 2.0 */
 // Copyright 2016 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
