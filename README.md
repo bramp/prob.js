@@ -90,9 +90,9 @@ How to release
 --------------
 
 ```shell
-make clean && make test   # Build and test once
-mversion patch            # Bump version number (v1.2.3 | major | minor | patch)
-make clean && make        # Be extra sure after the version bump it continues to work
+make clean && make   # Build and test once
+mversion patch       # Bump version number (v1.2.3 | major | minor | patch)
+make clean && make   # Be extra sure after the version bump it continues to work
 
 git add -f bower.json package.json dist/{prob-min.js,prob-min.js.map,prob.js}
 VERSION=v`mversion | tail -n 1 | cut -d ' ' -f 2`
@@ -101,7 +101,7 @@ git tag $VERSION
 git push origin
 git push origin --tags
 
-npm publish               # Publish to npm (publishing to bower is not needed)
+npm publish          # Publish to npm (publishing to bower is not needed)
 ```
 
 Licence (Apache 2)
