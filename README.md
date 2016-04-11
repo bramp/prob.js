@@ -45,7 +45,8 @@ Prob.uniform(min, max) // Uniform distribution in range [min, max).
 Prob.normal(μ, σ)      // Normal distribution with mean and standard deviation.
 Prob.exponential(λ)    // Exponential distribution with lambda.
 Prob.lognormal(μ, σ)   // Log-normal distribution defined as ln(normal(μ, σ)).
-Prob.zipf(s, N)        // Zipf's distribution returning integers in range [1, N]
+Prob.poisson(λ)        // Poisson distribution returning integers >= 0.
+Prob.zipf(s, N)        // Zipf's distribution returning integers in range [1, N].
 ```
 
 After generating a distribution, the following methods are available:

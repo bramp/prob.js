@@ -98,6 +98,14 @@ QUnit.test( "lognormal", function(assert) {
 	checkResults(assert, f);
 });
 
+QUnit.test( "poisson", function(assert) {
+	var f = Prob.poisson(2);
+
+	checkMinMax(assert, f, 0, Number.POSITIVE_INFINITY);
+	checkEstimators(assert, f, 2, 2);
+	checkResults(assert, f);
+});
+
 QUnit.test( "zipf", function(assert) {
 	var f = Prob.zipf(1, 10);
 
@@ -115,12 +123,14 @@ function checkFunction(assert, name, func) {
 }
 
 QUnit.test( "defaults", function(assert) {
-	// Tests we can create each distribution with default args, and generate one number.
+	// Tests we can create each distribution with default args, and can generate atleast one number.
 	checkFunction(assert, 'uniform', Prob.uniform);
 	checkFunction(assert, 'normal', Prob.normal);
 	checkFunction(assert, 'exponential', Prob.exponential);
 	checkFunction(assert, 'lognormal', Prob.lognormal);
+	checkFunction(assert, 'poisson', Prob.poisson);
 	checkFunction(assert, 'zipf', Prob.zipf);
+
 });
 
 // TODO Check zipf binary search works as expected, search for 0, 1.0, etc

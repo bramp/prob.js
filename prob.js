@@ -143,6 +143,34 @@
 		f.Max = Number.POSITIVE_INFINITY;
 		f.Mean = Math.exp( mu + ((sigma * sigma) / 2) );
 		f.Variance = (Math.exp(sigma * sigma) - 1) * Math.exp(2 * mu + sigma*sigma);
+		f.Type = Prob.Type.CONTINUOUS;
+		return f;
+	};
+
+	// Returns int random chosen from a poisson disribution.
+	Prob.poisson = function(lambda) {
+		lambda = typeof lambda !== 'undefined' ? lambda : 1;
+
+		// Knuth's algorithm
+		var L = Math.exp(-lambda);
+		
+		var f = function(rand) {
+			var k = 0;
+			var p = 1;
+			while(true) {
+				p = p * rand01(rand || mt); // BUG: This should be [0,1] not [0,1)
+				if (p <= L) {
+					break;
+				}
+				k++;
+			}
+			return k;
+		};
+		f.Min = 0;
+		f.Max = Number.POSITIVE_INFINITY;
+		f.Mean = lambda;
+		f.Variance = lambda;
+		f.Type = Prob.Type.DISCRETE;
 		return f;
 	};
 
