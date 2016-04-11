@@ -1,4 +1,4 @@
-Prob.js
+Prob.js ![bower](https://img.shields.io/bower/v/prob.js.svg) [![npm](https://img.shields.io/npm/v/prob.js.svg)](https://www.npmjs.com/package/prob.js) [![LICENSE](https://img.shields.io/npm/l/prob.js.svg)](https://raw.githubusercontent.com/bramp/prob.js/master/LICENSE)
 =======
 Generate random numbers from different probability distributions.
 
