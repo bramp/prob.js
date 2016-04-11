@@ -22,7 +22,7 @@ MAKEFLAGS += --no-builtin-rules
 
 NODE_MODULES := $(PWD)/node_modules/.bin
 
-all: bower_components
+all: bower_components lint
 
 node_modules: package.json
 	@which node > /dev/null || (echo "node is not installed" && exit 1)
