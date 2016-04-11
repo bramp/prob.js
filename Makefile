@@ -46,6 +46,7 @@ lint: node_modules
 	$(NODE_MODULES)/jshint --verbose *.js
 	$(NODE_MODULES)/jsonlint package.json -q
 	$(NODE_MODULES)/jsonlint bower.json -q
+	$(NODE_MODULES)/jscs --preset=google --fix *.js
 
 veryclean:
 	-rm -rf node_modules
