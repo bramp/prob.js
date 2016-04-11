@@ -26,10 +26,7 @@
             },
             'xaxis': {
                 range: options.xrange
-            }/*,
-            'yaxis': {
-                range: options.yrange
-            }*/
+            }
         };
         var config = {
             displayModeBar: false
@@ -84,18 +81,15 @@
 
     drawHistogram('normal', Prob.normal(), {  // μ = 0, σ = 1.0 
         nbinsx: 120,
-        xrange: [-3, 3],
-        yrange: [0, 0.45],
+        xrange: [-3, 3]
     });
     drawHistogram('uniform', Prob.uniform(), {  // min = 0, max = 1.0
         nbinsx: 100,
-        xrange: [0, 1],
-        yrange: [0, 1.2],
+        xrange: [0, 1]
     });
     drawHistogram('exponential', Prob.exponential(), {  // λ = 1.0
         nbinsx: 120,
-        xrange: [0, 5],
-        yrange: [0, 1],
+        xrange: [0, 5]
     });
     drawHistogram('lognormal', Prob.lognormal(), { // μ = 0, σ = 1.0
         nbinsx: 120,
@@ -104,7 +98,6 @@
     });
     drawHistogram('zipf', Prob.zipf(), { // s = 1, N = 100
         nbinsx: 101,
-        xrange: [0, 101],
-        yrange: [0, 0.4],
+        xrange: [0, 101]
     });
 }());
