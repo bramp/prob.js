@@ -28,6 +28,8 @@ var distributions = {
                   args: [['lambda', 1]]},
   'lognormal':   {desc: 'Lognormal distribution',
                   args: [['mean', 0], ['stddev', 1]]},
+  'poisson':     {desc: 'Poisson distribution',
+                  args: [['lambda', 1]]},
   'zipf':        {desc: 'Zipf\'s distribution',
                   args: [['s', 1], ['n', 100]]},
 };
