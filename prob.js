@@ -58,6 +58,12 @@
 	var rand01 = Random.real(0, 1, false); // [0,1)
 	var rand11 = Random.real(-1, 1, true); // [-1,1]
 
+    Prob.Type = {
+    	UNKNOWN: 0,
+        CONTINUOUS: 1,
+        DISCRETE: 2,
+    };
+
 	// Returns floats uniformly distributed between a (inclusive) and b (exclusive).
 	Prob.uniform = function(min, max) {
 		min = typeof min !== 'undefined' ? min : 0.0;
@@ -71,6 +77,7 @@
 		f.Max = max;
 		f.Mean = min + range/2;
 		f.Variance = ((max-min) * (max-min)) / 12;
+		f.Type = Prob.Type.CONTINUOUS;
 		return f;
 	};
 
@@ -103,6 +110,7 @@
 		f.Max = Number.POSITIVE_INFINITY;
 		f.Mean = mean;
 		f.Variance = sd * sd;
+		f.Type = Prob.Type.CONTINUOUS;
 		return f;
 	};
 
@@ -118,6 +126,7 @@
 		f.Max = Number.POSITIVE_INFINITY;
 		f.Mean = mean;
 		f.Variance = Math.pow(lambda, -2);
+		f.Type = Prob.Type.CONTINUOUS;
 		return f;
 	};
 
@@ -183,6 +192,7 @@
 		f.Max = N + 1;
 		f.Mean = null;     // TODO
 		f.Variance = null; // TODO
+		f.Type = Prob.Type.DISCRETE;
 		return f;
 	};
 
