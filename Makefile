@@ -51,12 +51,17 @@ veryclean: clean
 	-rm -rf bower_components
 
 lint: node_modules
+	# Lint
 	$(NODE_MODULES)/jshint --verbose *.js
 	$(NODE_MODULES)/jsonlint package.json -q
 	$(NODE_MODULES)/jsonlint bower.json -q
 
 	$(NODE_MODULES)/jshint --verbose cli/*.js
 	$(NODE_MODULES)/jsonlint cli/package.json -q
+
+	# Code Style.
+	$(NODE_MODULES)/jscs --preset=google --fix *.js
+	$(NODE_MODULES)/jscs --preset=google --fix cli/*.js
 
 
 test: node_modules dist/prob-min.js
