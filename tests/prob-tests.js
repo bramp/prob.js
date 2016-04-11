@@ -119,7 +119,7 @@ QUnit.module("API");
 function checkFunction(assert, name, func) {
 	var f = func();
 	assert.ok(typeof f === 'function', name + " returns a default generator function");
-	assert.ok(f(), name + " generated a random number");
+	assert.ok(typeof f() === 'number', name + " generated a random number");
 }
 
 QUnit.test( "defaults", function(assert) {
