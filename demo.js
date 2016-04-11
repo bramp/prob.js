@@ -93,8 +93,11 @@
     });
     drawHistogram('lognormal', Prob.lognormal(), { // μ = 0, σ = 1.0
         nbinsx: 120,
-        xrange: [0, 5],
-        yrange: [0, 0.7],
+        xrange: [0, 5]
+    });
+    drawHistogram('poisson', Prob.poisson(4), { // λ = 1.0
+        nbinsx: 16,
+        xrange: [0, 16]
     });
     drawHistogram('zipf', Prob.zipf(), { // s = 1, N = 100
         nbinsx: 101,
