@@ -1,109 +1,135 @@
 <!doctype html>
 <html class="no-js" lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-        <title>Prob.js Demo Page</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prob.js Demo Page</title>
+    <meta
+      name="description"
+      content="Generate random numbers from different probability distributions."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="bower_components/prism/themes/prism.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.3.6/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.css"
+    />
 
-        <style>
-            .chart {
-                width:600px;
-                height:400px;
-            }
-        </style>
-    </head>
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+    <style>
+      .chart {
+        width: 100%;
+        height: 300px;
+      }
+      h1 {
+        margin-top: 40px;
+      }
+      h2 {
+        margin-top: 30px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+      }
+      .demo-row {
+        margin-bottom: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Prob.js Examples</h1>
+          <p class="lead">Generate random numbers from different probability distributions.</p>
+          <p>by <a href="https://bramp.net">Andrew Brampton</a> 2016-2026</p>
+          <p>
+            <a href="https://github.com/bramp/prob.js#readme">README</a> |
+            <a href="https://github.com/bramp/prob.js">GitHub</a>
+          </p>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Prob.js Examples</h1>
-                    <p>Generate random numbers from different probability distributions.</p>
-                    <p>by <a href="https://bramp.net">Andrew Brampton</a> 2016</p>
-                    <p><a href="https://github.com/bramp/prob.js#readme">README</a> | <a href="https://github.com/bramp/prob.js">GitHub</a></p>
-                    <h2>Install</h2>
-                    <pre><code class="language-shell">bower install prob.js</code></pre>
-<pre><code class="language-html">&lt;script src=&quot;bower_components/random/lib/random.min.js&quot; type=&quot;text/javascript&quot; &gt;&lt;/script&gt;
-&lt;script src=&quot;bower_components/prob.js/dist/prob-min.js&quot; type=&quot;text/javascript&quot; &gt;&lt;/script&gt;
+          <h2>Install</h2>
+          <p>Via NPM:</p>
+          <pre><code class="language-shell">npm install prob.js</code></pre>
+
+          <p>Via HTML:</p>
+          <pre><code class="language-html">&lt;script src=&quot;random.min.js&quot; type=&quot;text/javascript&quot; &gt;&lt;/script&gt;
+&lt;script src=&quot;prob-min.js&quot; type=&quot;text/javascript&quot; &gt;&lt;/script&gt;
 </code></pre>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Demos</h2>
-                    <p>We create a random distribution, then generate 1 million numbers, drawing histograms as we go.</p>
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                  
-<pre><code class="language-javascript">// Normal (μ = 0, σ = 1.0)
-var f = Prob.normal(0, 1.0);</code></pre>
-                  <div id="normal" class="chart"></div>
-              </div>
-              <div class="col-md-6">
-<pre><code class="language-javascript">// Uniform (min = 0, max = 1.0)
-var f = Prob.uniform(0, 1.0);</code></pre>
-                <div id="uniform" class="chart"></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-<pre><code class="language-javascript">// Exponential (λ = 1.0)
-var f = Prob.exponential(1.0);</code></pre>
-                  <div id="exponential" class="chart"></div>
-              </div>
-              <div class="col-md-6">
-<pre><code class="language-javascript">// Log-normal (μ = 0, σ = 1.0)
-var f = Prob.lognormal(0, 1.0);</code></pre>
-                <div id="lognormal" class="chart"></div>
-              </div>
-            </div>
-            <div class="row">
-                
-              <div class="col-md-6">
-<pre><code class="language-javascript">// Poisson (λ = 4.0)
-var f = Prob.poisson(4.0);</code></pre>
-                  <div id="poisson" class="chart"></div>
-              </div>
-              <div class="col-md-6">
-<pre><code class="language-javascript">// Zipf (s = 1, N = 100)
-var f = Prob.zipf(1, 100);</code></pre>
-                  <div id="zipf" class="chart"></div>
-              </div>
-            </div>
         </div>
+      </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Demos</h2>
+          <p>
+            We create a random distribution, then generate 1 million numbers, drawing histograms as
+            we go.
+          </p>
+        </div>
+      </div>
 
-        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <div class="row demo-row">
+        <div class="col-md-6">
+          <pre><code class="language-javascript">// Normal (μ = 0, σ = 1.0)
+var f = Prob.normal(0, 1.0);</code></pre>
+          <div id="normal" class="chart"></div>
+        </div>
+        <div class="col-md-6">
+          <pre><code class="language-javascript">// Uniform (min = 0, max = 1.0)
+var f = Prob.uniform(0, 1.0);</code></pre>
+          <div id="uniform" class="chart"></div>
+        </div>
+      </div>
 
-        <script type="text/javascript" src="bower_components/plotly.js/dist/plotly.min.js" charset="utf-8"></script>
+      <div class="row demo-row">
+        <div class="col-md-6">
+          <pre><code class="language-javascript">// Exponential (λ = 1.0)
+var f = Prob.exponential(1.0);</code></pre>
+          <div id="exponential" class="chart"></div>
+        </div>
+        <div class="col-md-6">
+          <pre><code class="language-javascript">// Log-normal (μ = 0, σ = 1.0)
+var f = Prob.lognormal(0, 1.0);</code></pre>
+          <div id="lognormal" class="chart"></div>
+        </div>
+      </div>
 
-        <script type="text/javascript" src="bower_components/random/lib/random.min.js"></script>
-        <script type="text/javascript" src="bower_components/prob.js/dist/prob-min.js"></script>
+      <div class="row demo-row">
+        <div class="col-md-6">
+          <pre><code class="language-javascript">// Poisson (λ = 4.0)
+var f = Prob.poisson(4.0);</code></pre>
+          <div id="poisson" class="chart"></div>
+        </div>
+        <div class="col-md-6">
+          <pre><code class="language-javascript">// Zipf (s = 1, N = 100)
+var f = Prob.zipf(1, 100);</code></pre>
+          <div id="zipf" class="chart"></div>
+        </div>
+      </div>
+    </div>
 
-        <script type="text/javascript" src="bower_components/prism/prism.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.3.6/js/bootstrap.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.7.0/plotly.min.js"
+      charset="utf-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"
+    ></script>
 
-        <script type="text/javascript" src="demo.js"></script>
+    <!-- Local files copied during build -->
+    <script type="text/javascript" src="random.min.js"></script>
+    <script type="text/javascript" src="prob-min.js"></script>
 
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='https://www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-36551491-2','auto');ga('send','pageview');
-        </script>
-    </body>
+    <script type="text/javascript" src="demo.js"></script>
+  </body>
 </html>
