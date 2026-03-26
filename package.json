@@ -18,7 +18,7 @@
     "prettier": "^3.8.1",
     "qunit": "^2.25.0",
     "random-js": "1.0.x",
-    "requirejs": "2.2.x",
+    "requirejs": "2.3.x",
     "terser": "^5.46.1",
     "yargs": "^16.2.0"
   },
