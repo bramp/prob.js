@@ -15,7 +15,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 (function () {
   'use strict';
-  var mt = Random.engines.mt19937().autoSeed();
+  var MersenneTwister19937 = Random.MersenneTwister19937 || Random.engines.mt19937;
+  var mt = MersenneTwister19937.autoSeed();
 
   function drawHistogram(div, r, options) {
     var layout = {

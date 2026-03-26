@@ -36,10 +36,12 @@ function checkEstimators(assert, f, mean, variance) {
 
 function checkResults(assert, f, trials) {
   trials = trials || TRIALS;
-  var mt = Random.engines.mt19937().seed(SEED);
+  var MersenneTwister19937 = Random.MersenneTwister19937 || Random.engines.mt19937;
+  var mt = MersenneTwister19937.seed(SEED);
 
   var sum = 0,
     sum2 = 0;
+
   for (var i = 0; i < trials; i++) {
     var value = f(mt);
     sum += value;
@@ -145,9 +147,11 @@ QUnit.test('zipf args', function (assert) {
 });
 
 QUnit.test('source', function (assert) {
-  var xkcd_source = function () {
-    return 4; // chosen by fair dice roll.
-    // guranteed to be random.
+  var xkcd_source = {
+    next: function () {
+      return 4; // chosen by fair dice roll.
+      // guranteed to be random.
+    },
   };
 
   var r = Prob.uniform();
@@ -158,6 +162,6 @@ QUnit.test('source', function (assert) {
   assert.ok(typeof x === 'number', 'XKCD random source supplys a number');
   assert.ok(x === y && y == z, 'XKCD random source works');
 
-  x = r(Random.engines.nativeMath);
+  x = r(Random.nativeMath);
   assert.ok(typeof x === 'number', 'Other random js source supplys a number');
 });
