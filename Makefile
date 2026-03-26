@@ -52,9 +52,11 @@ fix: node_modules
 	npm run format
 
 upgrade:
-	npm outdated || true
 	npm update
 	npm install
+
+check-upgrade:
+	npm outdated || true
 
 test: node_modules dist/prob-min.js
 	# Unminified (with coverage)
