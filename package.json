@@ -4,7 +4,7 @@
     "url": "https://github.com/bramp/prob.js/issues"
   },
   "dependencies": {
-    "random-js": "1.0.x"
+    "random-js": "2.1.x"
   },
   "description": "Generate random numbers from different probability distributions.",
   "devDependencies": {
@@ -17,7 +17,7 @@
     "mversion": "^2.0.1",
     "prettier": "^3.8.1",
     "qunit": "^2.25.0",
-    "random-js": "1.0.x",
+    "random-js": "2.1.x",
     "requirejs": "2.2.x",
     "terser": "^5.46.1",
     "yargs": "^16.2.0"
