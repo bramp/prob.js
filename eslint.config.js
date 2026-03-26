@@ -6,7 +6,7 @@ module.exports = [
   js.configs.recommended,
   prettierConfig,
   {
-    ignores: ['dist/**', 'coverage/**', '_site/**'],
+    ignores: ['dist/**', 'coverage/**', 'build/**'],
   },
   {
     plugins: {

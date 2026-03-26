@@ -78,7 +78,7 @@ site: dist/prob-min.js
 	cp site/index.html build/site/
 	cp site/demo.js build/site/
 	cp dist/prob-min.js build/site/
-	cp node_modules/random-js/lib/random.min.js build/site/
+	cp node_modules/random-js/dist/random-js.umd.min.js build/site/random.min.js
 	@echo [site] Built site in build/site/
 
 dist/prob.js: prob.js node_modules
