@@ -8,15 +8,19 @@
   },
   "description": "Generate random numbers from different probability distributions.",
   "devDependencies": {
-    "bower": "1.7.x",
-    "jshint": "2.9.x",
-    "jsonlint": "1.6.x",
-    "jscs": "^2.11.0",
-    "mversion": "1.10.x",
-    "qunit": "0.9.x",
+    "@eslint/js": "^9.39.4",
+    "c8": "^11.0.0",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "lodash": "^4.17.23",
+    "mversion": "^2.0.1",
+    "prettier": "^3.8.1",
+    "qunit": "^2.25.0",
     "random-js": "1.0.x",
-    "uglify-js": "2.6.x",
-    "requirejs": "2.2.x"
+    "requirejs": "2.2.x",
+    "terser": "^5.46.1",
+    "yargs": "^16.2.0"
   },
   "homepage": "https://github.com/bramp/prob.js#readme",
   "keywords": [
@@ -36,7 +40,9 @@
     "url": "git+https://github.com/bramp/prob.js.git"
   },
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "version": "1.0.6"
 }

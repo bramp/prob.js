@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc.
+# Copyright 2026 Andrew Brampton
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,98 +14,84 @@
 #
 ################################################################################
 
-.PHONY: all test clean veryclean lint
+.PHONY: all test test-ci clean veryclean lint format fix upgrade
 
 # Disable implicit rules
 .SUFFIXES:
 MAKEFLAGS += --no-builtin-rules
 
 NODE_MODULES := $(PWD)/node_modules/.bin
-BOWER_COMPONENTS := $(PWD)/bower_components
 
-all: lint dist/prob-min.js test
+all: install format lint test
+
+install: node_modules
 
 node_modules: package.json
 	@which node > /dev/null || (echo "node is not installed" && exit 1)
 	@which npm > /dev/null || (echo "npm is not installed" && exit 1)
 
-	#
 	# NPM update needed.
-	#
 	npm install
-	npm update
-	touch -c $@
-
-bower_components: node_modules bower.json
-	#
-	# Bower update needed.
-	#
-	$(NODE_MODULES)/bower update
 	touch -c $@
 
 clean:
-	-rm dist/*
+	-rm -rf dist/*
+	-rm -rf coverage
 
 veryclean: clean
 	-rm -rf node_modules
-	-rm -rf bower_components
 
 lint: node_modules
-	# Lint
-	$(NODE_MODULES)/jshint --verbose *.js
-	$(NODE_MODULES)/jsonlint package.json -q
-	$(NODE_MODULES)/jsonlint bower.json -q
+	npm run lint
 
-	$(NODE_MODULES)/jshint --verbose cli/*.js
-	$(NODE_MODULES)/jsonlint cli/package.json -q
+format: node_modules
+	npm run format
 
-	# Code Style.
-	$(NODE_MODULES)/jscs --preset=google --fix *.js
-	$(NODE_MODULES)/jscs --preset=google --fix cli/*.js
+fix: node_modules
+	npx eslint --fix .
+	npm run format
 
+upgrade:
+	npm outdated || true
+	npm update
+	npm install
 
 test: node_modules dist/prob-min.js
-
 	# Unminified (with coverage)
-	$(NODE_MODULES)/qunit \
-		--cov \
-		--timeout 60000 \
-		-d Random:$(BOWER_COMPONENTS)/random/lib/random.js \
-		-c Prob:dist/prob.js \
-		-t tests/prob-tests.js tests/import-tests.js
-		# BUG: We list both tests, so that we get better test coverage https://github.com/kof/node-qunit/issues/131
+	npx c8 $(NODE_MODULES)/qunit \
+		--require ./tests/setup.js \
+		tests/prob-tests.js tests/import-tests.js tests/cli-tests.js
 
 	# Minified (without coverage)
 	$(NODE_MODULES)/qunit \
-		--timeout 60000 \
-		-d Random:$(BOWER_COMPONENTS)/random/lib/random.js \
-		-c Prob:dist/prob-min.js \
-		-t tests/*-tests.js
+		--require ./tests/setup-min.js \
+		tests/prob-tests.js tests/import-tests.js tests/cli-tests.js
 
-	@echo Coverage report at file://$(PWD)/coverage/lcov-report/index.html
 	@echo [test] OK
 
-#	$(NODE_MODULES)/qunit \
-#		--cov \
-#		--timeout 60000 \
-#		-d Random:$(BOWER_COMPONENTS)/random/lib/random.min.js \
-#		-c Prob:dist/prob-min.js \
-#		-t *-tests.js
+test-ci: install lint test
 
-dist/prob.js: prob.js
-	$(eval VERSION := $(shell $(NODE_MODULES)/mversion | tail -n 1 | cut -d ' ' -f 2))
+site: dist/prob-min.js
+	@mkdir -p build/site
+	cp site/index.html build/site/
+	cp site/demo.js build/site/
+	cp dist/prob-min.js build/site/
+	cp node_modules/random-js/lib/random.min.js build/site/
+	@echo [site] Built site in build/site/
+
+dist/prob.js: prob.js node_modules
+	$(eval VERSION := $(shell npx mversion | tail -n 1 | cut -d ' ' -f 2))
 	$(eval YEAR := $(shell date +%Y))
-
-	echo "/* Prob.js $(VERSION) (c) $(YEAR) Google, Inc. License: Apache 2.0 */" > $@
+	@mkdir -p dist
+	echo "/* Prob.js $(VERSION) (c) $(YEAR) Andrew Brampton. License: Apache 2.0 */" > $@
 	cat $< >> $@
 
-dist/prob-min.js dist/prob-min.js.map: bower_components dist/prob.js
-
+dist/prob-min.js dist/prob-min.js.map: dist/prob.js node_modules
+	@mkdir -p dist
 	cd dist && \
-	$(NODE_MODULES)/uglifyjs \
+	$(NODE_MODULES)/terser \
 		prob.js \
 		-o prob-min.js \
-		--compress --lint \
+		--compress --mangle \
 		--comments '/Prob.js/' \
-		--source-map prob-min.js.map \
-		--source-map-url prob-min.js.map
+		--source-map "url='prob-min.js.map',filename='prob-min.js.map'"

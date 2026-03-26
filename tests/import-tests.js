@@ -16,40 +16,40 @@
 //
 // Test various imports we support.
 // Can only be run from within qunit command line.
-// 
+//
 
 var FILE = '../dist/prob-min';
 
 function checkIsValid(assert, Prob) {
-	assert.strictEqual(typeof Prob, 'object', 'Prob exists and is a object');
-	if (Prob) {
-		assert.strictEqual(typeof Prob.uniform, 'function', 'Prob.uniform exists and is a function');
-	}
+  assert.strictEqual(typeof Prob, 'object', 'Prob exists and is a object');
+  if (Prob) {
+    assert.strictEqual(typeof Prob.uniform, 'function', 'Prob.uniform exists and is a function');
+  }
 }
 
-QUnit.module("Modules");
+QUnit.module('Modules');
 
 // Test that NodeJS can load this module
-QUnit.test( "node", function(assert) {
-	var p = require(FILE);
-	checkIsValid(assert, p);
+QUnit.test('node', function (assert) {
+  var p = require(FILE);
+  checkIsValid(assert, p);
 });
 
 // Test that requirejs (AMD) can load this module
-QUnit.test( "amd", function(assert) {
-	var requirejs = require('requirejs');
-	requirejs.config({
-		baseUrl: __dirname,
-	    nodeRequire: null,
-	    paths: {
-	        'prob': FILE
-	    }
-	});
+QUnit.test('amd', function (assert) {
+  var requirejs = require('requirejs');
+  requirejs.config({
+    baseUrl: __dirname,
+    nodeRequire: null,
+    paths: {
+      prob: FILE,
+    },
+  });
 
-	var p = requirejs('prob');
-	checkIsValid(assert, p);
+  var p = requirejs('prob');
+  checkIsValid(assert, p);
 
-/*  // Async version:
+  /*  // Async version:
 	stop();
 	requirejs(['prob'], function (Prob) {
 	    checkIsValid(assert, Prob);

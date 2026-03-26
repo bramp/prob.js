@@ -1,3 +1,138 @@
-/* Prob.js 1.0.6 (c) 2016 Google, Inc. License: Apache 2.0 */
-!function(){"use strict";function assert(condition,message){if(!condition){if(message=message||"Assertion failed","undefined"!=typeof Error)throw new Error(message);throw message}}function binarySearch(arr,needle){for(var high=arr.length,low=-1;high-low>1;){var mid=Math.floor(low+(high-low)/2);arr[mid]<needle?low=mid:high=mid}return high}var root="object"==typeof self&&self.self===self&&self||"object"==typeof global&&global.global===global&&global||this,Prob={};"undefined"==typeof exports||exports.nodeType?root.Prob=Prob:("undefined"!=typeof module&&!module.nodeType&&module.exports&&(exports=module.exports=Prob),exports.Prob=Prob);var Random=root.Random||("function"==typeof require?require("random-js"):null);if(null===Random)throw"random-js is required https://github.com/ckknight/random-js";var mt=Random.engines.mt19937().autoSeed(),rand01=Random.real(0,1,!1),rand11=Random.real(-1,1,!0);Prob.Type={UNKNOWN:0,CONTINUOUS:1,DISCRETE:2},Prob.uniform=function(min,max){min="undefined"!=typeof min?min:0,max="undefined"!=typeof max?max:1;var range=max-min,f=function(rand){return min+rand01(rand||mt)*range};return f.Min=min,f.Max=max,f.Mean=min+range/2,f.Variance=(max-min)*(max-min)/12,f.Type=Prob.Type.CONTINUOUS,f},Prob.normal=function(mean,sd){mean="undefined"!=typeof mean?mean:0,sd="undefined"!=typeof sd?sd:1;var y1=null,y2=null,f=function(rand){if(null!==y2)return y1=y2,y2=null,y1*sd+mean;var x1,x2,w;do x1=rand11(rand||mt),x2=rand11(rand||mt),w=x1*x1+x2*x2;while(w>=1||0===w);return w=Math.sqrt(-2*Math.log(w)/w),y1=x1*w,y2=x2*w,y1*sd+mean};return f.Min=Number.NEGATIVE_INFINITY,f.Max=Number.POSITIVE_INFINITY,f.Mean=mean,f.Variance=sd*sd,f.Type=Prob.Type.CONTINUOUS,f},Prob.exponential=function(lambda){lambda="undefined"!=typeof lambda?lambda:1;var mean=1/lambda,f=function(rand){return-1*Math.log(rand01(rand||mt))*mean};return f.Min=0,f.Max=Number.POSITIVE_INFINITY,f.Mean=mean,f.Variance=Math.pow(lambda,-2),f.Type=Prob.Type.CONTINUOUS,f},Prob.lognormal=function(mu,sigma){mu="undefined"!=typeof mu?mu:0,sigma="undefined"!=typeof sigma?sigma:1;var nf=Prob.normal(mu,sigma),f=function(rand){return Math.exp(nf(rand))};return f.Min=0,f.Max=Number.POSITIVE_INFINITY,f.Mean=Math.exp(mu+sigma*sigma/2),f.Variance=(Math.exp(sigma*sigma)-1)*Math.exp(2*mu+sigma*sigma),f.Type=Prob.Type.CONTINUOUS,f},Prob.poisson=function(lambda){lambda="undefined"!=typeof lambda?lambda:1;var L=Math.exp(-lambda),f=function(rand){for(var k=0,p=1;;){if(p*=rand01(rand||mt),L>=p)break;k++}return k};return f.Min=0,f.Max=Number.POSITIVE_INFINITY,f.Mean=lambda,f.Variance=lambda,f.Type=Prob.Type.DISCRETE,f},Prob.zipf=function(s,N){s="undefined"!=typeof s?s:1,N="undefined"!=typeof N?N:100,assert(N>=1,"N must be >= 1");for(var sum=0,i=1;N>=i;i++)sum+=1/Math.pow(i,s);var cdf=[0],sumProb=0;for(i=1;N>=i;i++)sumProb+=1/(sum*Math.pow(i,s)),cdf[i]=sumProb;var f=function(rand){return binarySearch(cdf,rand01(rand||mt))};return f.Min=1,f.Max=N+1,f.Mean=null,f.Variance=null,f.Type=Prob.Type.DISCRETE,f},"function"==typeof define&&define.amd&&define("prob",[],function(){return Prob})}();
+/* Prob.js 1.0.6 (c) 2026 Andrew Brampton. License: Apache 2.0 */
+!(function () {
+  'use strict';
+  var e =
+      ('object' == typeof self && self.self === self && self) ||
+      ('object' == typeof global && global.global === global && global) ||
+      this,
+    n = {};
+  'undefined' == typeof exports || exports.nodeType
+    ? (e.Prob = n)
+    : ('undefined' != typeof module &&
+        !module.nodeType &&
+        module.exports &&
+        (exports = module.exports = n),
+      (exports.Prob = n));
+  var r = e.Random || ('function' == typeof require ? require('random-js') : null);
+  if (null === r) throw 'random-js is required https://github.com/ckknight/random-js';
+  var o = r.engines.mt19937().autoSeed(),
+    t = r.real(0, 1, !1),
+    a = r.real(-1, 1, !0);
+  ((n.Type = { UNKNOWN: 0, CONTINUOUS: 1, DISCRETE: 2 }),
+    (n.uniform = function (e, r) {
+      var a = (r = void 0 !== r ? r : 1) - (e = void 0 !== e ? e : 0),
+        i = function (n) {
+          return e + t(n || o) * a;
+        };
+      return (
+        (i.Min = e),
+        (i.Max = r),
+        (i.Mean = e + a / 2),
+        (i.Variance = ((r - e) * (r - e)) / 12),
+        (i.Type = n.Type.CONTINUOUS),
+        i
+      );
+    }),
+    (n.normal = function (e, r) {
+      ((e = void 0 !== e ? e : 0), (r = void 0 !== r ? r : 1));
+      var t = null,
+        i = null,
+        u = function (n) {
+          if (null !== i) return ((t = i), (i = null), t * r + e);
+          var u, f, l;
+          do {
+            l = (u = a(n || o)) * u + (f = a(n || o)) * f;
+          } while (l >= 1 || 0 === l);
+          return ((l = Math.sqrt((-2 * Math.log(l)) / l)), (i = f * l), (t = u * l) * r + e);
+        };
+      return (
+        (u.Min = Number.NEGATIVE_INFINITY),
+        (u.Max = Number.POSITIVE_INFINITY),
+        (u.Mean = e),
+        (u.Variance = r * r),
+        (u.Type = n.Type.CONTINUOUS),
+        u
+      );
+    }),
+    (n.exponential = function (e) {
+      var r = 1 / (e = void 0 !== e ? e : 1),
+        a = function (e) {
+          return -1 * Math.log(t(e || o)) * r;
+        };
+      return (
+        (a.Min = 0),
+        (a.Max = Number.POSITIVE_INFINITY),
+        (a.Mean = r),
+        (a.Variance = Math.pow(e, -2)),
+        (a.Type = n.Type.CONTINUOUS),
+        a
+      );
+    }),
+    (n.lognormal = function (e, r) {
+      ((e = void 0 !== e ? e : 0), (r = void 0 !== r ? r : 1));
+      var o = n.normal(e, r),
+        t = function (e) {
+          return Math.exp(o(e));
+        };
+      return (
+        (t.Min = 0),
+        (t.Max = Number.POSITIVE_INFINITY),
+        (t.Mean = Math.exp(e + (r * r) / 2)),
+        (t.Variance = (Math.exp(r * r) - 1) * Math.exp(2 * e + r * r)),
+        (t.Type = n.Type.CONTINUOUS),
+        t
+      );
+    }),
+    (n.poisson = function (e) {
+      e = void 0 !== e ? e : 1;
+      var r = Math.exp(-e),
+        a = function (e) {
+          for (var n = 0, a = 1; !((a *= t(e || o)) <= r); ) n++;
+          return n;
+        };
+      return (
+        (a.Min = 0),
+        (a.Max = Number.POSITIVE_INFINITY),
+        (a.Mean = e),
+        (a.Variance = e),
+        (a.Type = n.Type.DISCRETE),
+        a
+      );
+    }),
+    (n.zipf = function (e, r) {
+      ((e = void 0 !== e ? e : 1),
+        (function (e, n) {
+          if (!e) {
+            if (((n = n || 'Assertion failed'), 'undefined' != typeof Error)) throw new Error(n);
+            throw n;
+          }
+        })((r = void 0 !== r ? r : 100) >= 1, 'N must be >= 1'));
+      for (var a = 0, i = 1; i <= r; i++) a += 1 / Math.pow(i, e);
+      var u = [0],
+        f = 0;
+      for (i = 1; i <= r; i++) ((f += 1 / (a * Math.pow(i, e))), (u[i] = f));
+      var l = function (e) {
+        return (function (e, n) {
+          for (var r = e.length, o = -1; r - o > 1; ) {
+            var t = Math.floor(o + (r - o) / 2);
+            e[t] < n ? (o = t) : (r = t);
+          }
+          return r;
+        })(u, t(e || o));
+      };
+      return (
+        (l.Min = 1),
+        (l.Max = r + 1),
+        (l.Mean = null),
+        (l.Variance = null),
+        (l.Type = n.Type.DISCRETE),
+        l
+      );
+    }),
+    'function' == typeof define &&
+      define.amd &&
+      define('prob', [], function () {
+        return n;
+      }));
+})();
 //# sourceMappingURL=prob-min.js.map
