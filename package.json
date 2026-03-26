@@ -15,9 +15,9 @@
     "prettier": "^3.8.1",
     "qunit": "^2.25.0",
     "random-js": "^2.1.0",
-    "requirejs": "2.2.x",
+    "requirejs": "^2.3.8",
     "terser": "^5.46.1",
-    "yargs": "^16.2.0"
+    "yargs": "^17.7.2"
   },
   "homepage": "https://github.com/bramp/prob.js#readme",
   "keywords": [
