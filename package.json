@@ -17,7 +17,7 @@
     "random-js": "^2.1.0",
     "requirejs": "^2.3.8",
     "terser": "^5.46.1",
-    "yargs": "^17.7.2"
+    "yargs": "^18.0.0"
   },
   "homepage": "https://github.com/bramp/prob.js#readme",
   "keywords": [
