@@ -42,4 +42,10 @@ module.exports = [
       },
     },
   },
+  {
+    files: ['cli/cli.js'],
+    languageOptions: {
+      sourceType: 'module',
+    },
+  },
 ];

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2016 Google Inc.
+// Copyright 2016-2026 Andrew Brampton
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,9 +15,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-var _ = require('lodash');
-var util = require('util');
-var Prob = require('../dist/prob.js');
+import _ from 'lodash';
+import util from 'util';
+import Prob from '../dist/prob.js';
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 
 var distributions = {
   uniform: {
@@ -52,7 +54,7 @@ var distributions = {
   },
 };
 
-var argv = require('yargs')
+var y = yargs(hideBin(process.argv))
   .usage('Usage: $0 distribution [options]')
   .example('$0 normal --count 1000', 'Output 1000 normally distributed numbers')
   .option('count', {
@@ -82,10 +84,10 @@ _.forEach(distributions, function (distribution, name) {
     };
   });
 
-  argv = argv.command(name, distribution.desc, opts);
+  y = y.command(name, distribution.desc, opts);
 });
 
-argv = argv.strict().argv;
+var argv = y.strict().argv;
 
 var dist = argv._[0];
 var args = _.map(distributions[dist].args, function (arg) {
@@ -102,12 +104,3 @@ if (argv.verbose) {
     util.format('Expected min: %d max: %d mean: %d variance: %d', f.Min, f.Max, f.Mean, f.Variance)
   );
 }
-
-/* or a simple example:
-var Prob = require('prob.js');
-var f = Prob.normal(0, 1);
-
-for (var i = 0; i < count; i++) {
-	console.log(f());
-}
-*/
