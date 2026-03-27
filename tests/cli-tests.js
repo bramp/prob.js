@@ -7,7 +7,7 @@ const path = require('path');
  */
 function isCliSupported() {
   const [major, minor] = process.versions.node.split('.').map(Number);
-  if (major > 22) return true;
+  if (major >= 23) return true;
   if (major === 22) return minor >= 12;
   if (major === 21) return false; // yargs strictly follows LTS schedule
   if (major === 20) return minor >= 19;
