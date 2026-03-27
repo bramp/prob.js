@@ -36,10 +36,15 @@
     "type": "git",
     "url": "git+https://github.com/bramp/prob.js.git"
   },
+  "files": [
+    "dist/",
+    "prob.js"
+  ],
   "scripts": {
     "test": "make test",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepublishOnly": "make all"
   },
   "version": "1.0.6"
 }
