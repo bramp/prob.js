@@ -51,14 +51,18 @@
   }
 
   // TODO Remove the dependency on Random JS
-  var Random = root.Random || (typeof require === 'function' ? require('random-js') : null);
-  if (Random === null) {
+  var RandomLib = root.Random || (typeof require === 'function' ? require('random-js') : null);
+  if (RandomLib === null) {
     throw 'random-js is required https://github.com/ckknight/random-js';
   }
 
-  var mt = Random.engines.mt19937().autoSeed(); // Fallback generator when one isn't specified
-  var rand01 = Random.real(0, 1, false); // [0,1)
-  var rand11 = Random.real(-1, 1, true); // [-1,1]
+  // Handle difference between v1 (one object) and v2 (object with named exports)
+  var MersenneTwister19937 = RandomLib.MersenneTwister19937 || RandomLib.engines.mt19937;
+  var real = RandomLib.real;
+
+  var mt = MersenneTwister19937.autoSeed(); // Fallback generator when one isn't specified
+  var rand01 = real(0, 1, false); // [0,1)
+  var rand11 = real(-1, 1, true); // [-1,1]
 
   Prob.Type = {
     UNKNOWN: 0,
