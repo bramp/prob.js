@@ -1,4 +1,4 @@
-/* Prob.js 1.0.6 (c) 2016 Google, Inc. License: Apache 2.0 */
+/* Prob.js 2.0.0 (c) 2026 Andrew Brampton. License: Apache 2.0 */
 // Copyright 2016 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +14,16 @@
 // limitations under the License.
 //
 ////////////////////////////////////////////////////////////////////////////////
-(function() {
+(function () {
   'use strict';
 
   // Establish the root object, `window` (`self`) in the browser, `global`
   // on the server, or `this` in some virtual machines. We use `self`
   // instead of `window` for `WebWorker` support.
-  var root = typeof self == 'object' && self.self === self && self ||
-  typeof global == 'object' && global.global === global && global ||
-  this;
+  var root =
+    (typeof self == 'object' && self.self === self && self) ||
+    (typeof global == 'object' && global.global === global && global) ||
+    this;
 
   var Prob = {};
 
@@ -50,15 +51,18 @@
   }
 
   // TODO Remove the dependency on Random JS
-  var Random = root.Random ||
-              (typeof require === 'function' ? require('random-js') : null);
-  if (Random === null) {
+  var RandomLib = root.Random || (typeof require === 'function' ? require('random-js') : null);
+  if (RandomLib === null) {
     throw 'random-js is required https://github.com/ckknight/random-js';
   }
 
-  var mt = Random.engines.mt19937().autoSeed(); // Fallback generator when one isn't specified
-  var rand01 = Random.real(0, 1, false); // [0,1)
-  var rand11 = Random.real(-1, 1, true); // [-1,1]
+  // Handle difference between v1 (one object) and v2 (object with named exports)
+  var MersenneTwister19937 = RandomLib.MersenneTwister19937 || RandomLib.engines.mt19937;
+  var real = RandomLib.real;
+
+  var mt = MersenneTwister19937.autoSeed(); // Fallback generator when one isn't specified
+  var rand01 = real(0, 1, false); // [0,1)
+  var rand11 = real(-1, 1, true); // [-1,1]
 
   Prob.Type = {
     UNKNOWN: 0,
@@ -67,12 +71,12 @@
   };
 
   // Returns floats uniformly distributed between min (inclusive) and max (exclusive).
-  Prob.uniform = function(min, max) {
+  Prob.uniform = function (min, max) {
     min = typeof min !== 'undefined' ? min : 0.0;
     max = typeof max !== 'undefined' ? max : 1.0;
 
-    var range = (max - min);
-    var f = function(rand) {
+    var range = max - min;
+    var f = function (rand) {
       return min + rand01(rand || mt) * range;
     };
     f.Min = min;
@@ -84,13 +88,13 @@
   };
 
   // Returns floats random chosen from a normal disribution.
-  Prob.normal = function(mean, sd) {
+  Prob.normal = function (mean, sd) {
     mean = typeof mean !== 'undefined' ? mean : 0.0;
     sd = typeof sd !== 'undefined' ? sd : 1.0;
 
     var y1 = null;
     var y2 = null;
-    var f = function(rand) {
+    var f = function (rand) {
       if (y2 !== null) {
         y1 = y2;
         y2 = null;
@@ -120,11 +124,11 @@
   };
 
   // Returns floats random chosen from a exponential disribution.
-  Prob.exponential = function(lambda) {
+  Prob.exponential = function (lambda) {
     lambda = typeof lambda !== 'undefined' ? lambda : 1.0;
     var mean = 1 / lambda;
 
-    var f = function(rand) {
+    var f = function (rand) {
       return -1 * Math.log(rand01(rand || mt)) * mean;
     };
     f.Min = 0;
@@ -136,32 +140,31 @@
   };
 
   // Returns floats random chosen from a lognormal disribution.
-  Prob.lognormal = function(mu, sigma) {
+  Prob.lognormal = function (mu, sigma) {
     mu = typeof mu !== 'undefined' ? mu : 0;
     sigma = typeof sigma !== 'undefined' ? sigma : 1.0;
 
     var nf = Prob.normal(mu, sigma);
-    var f = function(rand) {
+    var f = function (rand) {
       return Math.exp(nf(rand));
     };
 
     f.Min = 0;
     f.Max = Number.POSITIVE_INFINITY;
-    f.Mean = Math.exp(mu + ((sigma * sigma) / 2));
-    f.Variance = (Math.exp(sigma * sigma) - 1) *
-                  Math.exp(2 * mu + sigma * sigma);
+    f.Mean = Math.exp(mu + (sigma * sigma) / 2);
+    f.Variance = (Math.exp(sigma * sigma) - 1) * Math.exp(2 * mu + sigma * sigma);
     f.Type = Prob.Type.CONTINUOUS;
     return f;
   };
 
   // Returns int random chosen from a poisson disribution.
-  Prob.poisson = function(lambda) {
+  Prob.poisson = function (lambda) {
     lambda = typeof lambda !== 'undefined' ? lambda : 1;
 
     // Knuth's algorithm
     var L = Math.exp(-lambda);
 
-    var f = function(rand) {
+    var f = function (rand) {
       var k = 0;
       var p = 1;
       while (true) {
@@ -198,7 +201,7 @@
   }
 
   // Returns integers random chosen from a zipf disribution.
-  Prob.zipf = function(s, N) {
+  Prob.zipf = function (s, N) {
     // We use a inverse CDF approach. We calculate the CDF for
     // the zipf function, then generate a uniform random number in the range [0,1).
     // A binary search of the CDF used to find the value which maps to that random number.
@@ -222,22 +225,21 @@
       cdf[i] = sumProb;
     }
 
-    var f = function(rand) {
+    var f = function (rand) {
       return binarySearch(cdf, rand01(rand || mt));
     };
 
     f.Min = 1;
     f.Max = N + 1;
-    f.Mean = null;     // TODO
+    f.Mean = null; // TODO
     f.Variance = null; // TODO
     f.Type = Prob.Type.DISCRETE;
     return f;
   };
 
   if (typeof define === 'function' && define.amd) {
-    define('prob', [], function() {
+    define('prob', [], function () {
       return Prob;
     });
   }
-
-}());
+})();
