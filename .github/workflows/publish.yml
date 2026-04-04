@@ -1,0 +1,36 @@
+# This workflow will run tests and then publish a package to NPM when a new version is tagged.
+name: Publish Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+# Sets permissions of the GITHUB_TOKEN to allow Trusted Publishing to NPM
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: npmjs
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
+
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish to NPM
+        run: npm publish --provenance --access public

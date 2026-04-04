@@ -1,13 +1,14 @@
 {
   "name": "prob.js-cli",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Demo CLI for Prob.js",
   "main": "cli.js",
   "author": "Andrew Brampton <github@bramp.net>",
   "license": "Apache-2.0",
+  "type": "module",
   "dependencies": {
-    "lodash": "^4.7.0",
-    "prob.js": "1.0.x",
-    "yargs": "^4.3.2"
+    "lodash": "^4.17.23",
+    "prob.js": "^2.0.0",
+    "yargs": "^18.0.0"
   }
 }
