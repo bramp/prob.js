@@ -82,24 +82,7 @@ console.log(r(Random.engines.browserCrypto));
 console.log(r());
 ```
 
-## How to release
-
-```shell
-make clean && make   # Build and test once
-mversion patch       # Bump version number (v1.2.3 | major | minor | patch)
-make clean && make   # Be extra sure after the version bump it continues to work
-
-git add -f bower.json package.json dist/{prob-min.js,prob-min.js.map,prob.js}
-VERSION=v`mversion | tail -n 1 | cut -d ' ' -f 2`
-git commit -m "Releasing version $VERSION"
-git tag $VERSION
-git push origin
-git push origin --tags
-
-npm publish          # Publish to npm (publishing to bower is not needed)
-```
-
-## Licence (Apache 2)
+## License (Apache 2)
 
 _This is not an official Google product (experimental or otherwise), it is
 just code that happens to be owned by Google._
