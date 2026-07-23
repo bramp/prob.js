@@ -6,7 +6,7 @@
   "description": "Generate random numbers from different probability distributions.",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "c8": "^11.0.0",
+    "c8": "^12.0.0",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
