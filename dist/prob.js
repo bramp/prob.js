@@ -1,4 +1,4 @@
-/* Prob.js 2.0.0 (c) 2026 Andrew Brampton. License: Apache 2.0 */
+/* Prob.js 2.0.1 (c) 2026 Andrew Brampton. License: Apache 2.0 */
 // Copyright 2016 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
